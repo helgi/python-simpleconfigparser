@@ -24,9 +24,13 @@ config = simpleconfigparser(defaults=defaults)
 
 Examples
 ========
+contents of read.ini:
+```
 [app]
 debug = yes
+````
 
+test.py:
 ```
 from simpleconfigparser import simpleconfigparser
 
