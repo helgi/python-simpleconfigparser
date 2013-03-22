@@ -6,7 +6,7 @@ Builds on top of the builtin SafeConfigParser but adds various convenience funct
 * Access to all the usual ConfigParser functionality
 * Access sections and items via convience objects instead of `get()`
 * Ability to set values via the objects `config.section.item = 'demmmmm'` and have `write()` still work as normal
-* Make all the common functions work directly from the section object `config.section.items()`, `config.section.getboolean('item')`
+* Make a few functions work directly from the section object `config.section.items()`, `config.section.getboolean('item')`
 * Strips any quotes on the edgeds of items used in the INI file instead of returning it as part of the values
 * Improve the defaults handling on the object to be more sensible
 

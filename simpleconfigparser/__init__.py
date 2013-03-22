@@ -2,7 +2,7 @@
 """
 The MIT License
 
-Copyright (c) 2013 Helgi Þorbjörnsson
+Copyright (c) 2013 Helgi Þorbjörnsson <helgi@php.net>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -57,18 +57,6 @@ class simpleconfigparser(configparser):
                 return None
 
             return self.parser.getboolean(self.section, name)
-
-        def getfloat(self, name):
-            if not self.section:
-                return None
-
-            return self.parser.getfloat(self.section, name)
-
-        def getint(self, name):
-            if not self.section:
-                return None
-
-            return self.parser.getint(self.section, name)
 
         def items(self):
             if not self.section:
