@@ -62,10 +62,10 @@ class TestSimpleconfigparser:
     def test_read_types(self):
         config = simpleconfigparser()
         config.read(join(test_path, 'types.ini'))
-        assert config.types.getint('int') == 6
-        assert config.types.getint('int2') == 7
-        assert config.types.getfloat('float') == 6.5
-        assert config.types.getfloat('float2') == 8.5
+        assert int(config.types.int) == 6
+        assert int(config.types.int2) == 7
+        assert float(config.types.float) == 6.5
+        assert float(config.types.float2) == 8.5
         assert config.types.getboolean('boolean_yes_1') is True
         assert config.types.getboolean('boolean_yes_2') is True
         assert config.types.getboolean('boolean_yes_3') is True

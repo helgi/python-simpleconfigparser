@@ -7,7 +7,7 @@ defaults = {
     }
 }
 
-config = simpleconfigparser()
+config = simpleconfigparser(defaults=defaults)
 print(config.app.name)
 
 config.read('read.ini')

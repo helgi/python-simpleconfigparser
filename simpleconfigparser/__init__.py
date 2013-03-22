@@ -30,8 +30,8 @@ except ImportError:
 import collections
 
 
-class simpleconfigparser(configparser):
-    class Section(object):
+class simpleconfigparser(configparser, dict):
+    class Section(dict):
         """
         Contain the section specific items that can be accessed via object properties
         """
@@ -42,11 +42,25 @@ class simpleconfigparser(configparser):
             self.section = section
             self.parser = parser
 
+        def __getitem__(self, name, raw=False, vars=None):
+            """Fetch a value via the dict handler"""
+            if name not in simpleconfigparser.Section.__dict__:
+                return self.parser.get(self.section, name, raw, vars)
+
+        def __setitem__(self, name, value):
+            """Set a value via the dict handler"""
+            if name in simpleconfigparser.Section.__dict__:
+                return dict.__setitem__(self, name, value)
+
+            return self.parser.set(self.section, name, value)
+
         def __getattr__(self, name, raw=False, vars=None):
+            """Fetch a value via the object handler"""
             if name not in simpleconfigparser.Section.__dict__:
                 return self.parser.get(self.section, name, raw, vars)
 
         def __setattr__(self, name, value):
+            """Set a value via the object handler"""
             if name in simpleconfigparser.Section.__dict__:
                 return object.__setattr__(self, name, value)
 
@@ -69,18 +83,33 @@ class simpleconfigparser(configparser):
 
             return items
 
-    def __init__(self, defaults=None, dict_type=collections.OrderedDict, allow_no_value=False):
-        configparser.__init__(self, defaults, dict_type, allow_no_value)
+    def __init__(self, defaults=None, *args, **kwargs):
+        configparser.__init__(self, defaults=None, *args, **kwargs)
         # Improved defaults handling
         if isinstance(defaults, dict):
             for section, values in defaults.iteritems():
+                # Break out original format defaults was passed in
+                if isinstance(values, dict):
+                    break
+
                 if section not in self.sections():
                     self.add_section(section)
 
                 for name, value in values.iteritems():
                     self.set(section, name, str(value))
 
+    def __getitem__(self, name):
+        """Access a section via a dict handler"""
+        if name not in simpleconfigparser.__dict__:
+            if name not in self.sections():
+                self.add_section(name)
+
+            return simpleconfigparser.Section(name, self)
+
+        return None
+
     def __getattr__(self, name, raw=False, vars=None):
+        """Access a section via a object handler"""
         if name not in simpleconfigparser.__dict__:
             if name not in self.sections():
                 self.add_section(name)
