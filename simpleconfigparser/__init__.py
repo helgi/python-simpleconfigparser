@@ -27,7 +27,6 @@ try:
     from configparser import configparser, NoOptionError, NoSectionError
 except ImportError:
     from ConfigParser import SafeConfigParser as configparser, NoOptionError, NoSectionError
-import collections
 
 
 class simpleconfigparser(configparser, dict):
@@ -89,7 +88,7 @@ class simpleconfigparser(configparser, dict):
         if isinstance(defaults, dict):
             for section, values in defaults.iteritems():
                 # Break out original format defaults was passed in
-                if isinstance(values, dict):
+                if not isinstance(values, dict):
                     break
 
                 if section not in self.sections():
