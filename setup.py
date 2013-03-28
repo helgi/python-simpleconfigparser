@@ -17,4 +17,5 @@ setup(name=PKG,
       keywords="ConfiParser,ini",
       zip_safe = True,
       test_suite="tests",
-      tests_require=['coverage', 'mock'])
+      tests_require=[]
+)
