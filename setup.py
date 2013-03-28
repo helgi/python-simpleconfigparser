@@ -13,7 +13,7 @@ VERSION = '0.1.0'
 setup(
     name=PKG,
     version=VERSION,
-    description="Simplified ConfigParser",
+    description="Simplifies and enchances functionalities in Python's ConfigParser",
     long_description=read('README'),
     author="Helgi Þorbjörnsson",
     author_email="helgi@php.net",
