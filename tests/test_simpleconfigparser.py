@@ -107,14 +107,14 @@ class TestSimpleconfigparser:
 
     def test_write(self, tmpdir):
         path = join(str(tmpdir), 'new.ini')
-        text = """[add]
+        text = b"""[add]
 this = woo!
 
 """
 
         config = simpleconfigparser()
         config.add.this = 'woo!'
-        with open(path, 'wb') as handle:
+        with open(path, 'w') as handle:
             config.write(handle)
 
         assert exists(path) is True

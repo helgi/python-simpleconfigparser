@@ -24,12 +24,12 @@ THE SOFTWARE.
 """
 
 try:
-    from configparser import configparser, NoOptionError, NoSectionError
+    from configparser import ConfigParser as configparser, NoOptionError, NoSectionError
 except ImportError:
     from ConfigParser import SafeConfigParser as configparser, NoOptionError, NoSectionError
 
 
-class simpleconfigparser(configparser, dict):
+class simpleconfigparser(configparser):
     class Section(dict):
         """
         Contain the section specific items that can be accessed via object properties
@@ -86,7 +86,7 @@ class simpleconfigparser(configparser, dict):
         configparser.__init__(self, defaults=None, *args, **kwargs)
         # Improved defaults handling
         if isinstance(defaults, dict):
-            for section, values in defaults.iteritems():
+            for section, values in defaults.items():
                 # Break out original format defaults was passed in
                 if not isinstance(values, dict):
                     break
@@ -94,7 +94,7 @@ class simpleconfigparser(configparser, dict):
                 if section not in self.sections():
                     self.add_section(section)
 
-                for name, value in values.iteritems():
+                for name, value in values.items():
                     self.set(section, name, str(value))
 
     def __getitem__(self, name):
@@ -126,6 +126,6 @@ class simpleconfigparser(configparser, dict):
     def get(self, section, option, raw=False, vars=None):
         try:
             # Strip out quotes from the edges
-            return configparser.get(self, section, option, raw, vars).strip('"\'')
+            return configparser.get(self, section, option, raw=raw, vars=vars).strip('"\'')
         except NoOptionError:
             return None
