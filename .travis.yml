@@ -7,4 +7,6 @@ python:
   - "2.6"
   - "pypy"
 
+install:
+  - python setup.py install
 script: py.test tests
