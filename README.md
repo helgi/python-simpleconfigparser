@@ -1,5 +1,6 @@
 SimpleConfigParser
 ==================
+[![Build Status](https://travis-ci.org/helgi/python-simpleconfigparser.png)](https://travis-ci.org/helgi/python-simpleconfigparser)
 
 Builds on top of the builtin SafeConfigParser but adds various convenience functionalities.
 
