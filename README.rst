@@ -45,6 +45,7 @@ contents of read.ini:
 test.py:
 
 .. code:: python
+
     from simpleconfigparser import simpleconfigparser
 
     config = simpleconfigparser()
