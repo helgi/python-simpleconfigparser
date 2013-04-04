@@ -14,7 +14,7 @@ setup(
     name=PKG,
     version=VERSION,
     description="Simplifies and enchances functionalities in Python's ConfigParser",
-    long_description=read('README.md'),
+    long_description=read('README.rst'),
     author="Helgi Þorbjörnsson",
     author_email="helgi@php.net",
     url="http://github.com/helgi/python-simpleconfigparser",
