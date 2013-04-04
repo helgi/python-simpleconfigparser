@@ -19,6 +19,7 @@ setup(
     author_email="helgi@php.net",
     url="http://github.com/helgi/python-simpleconfigparser",
     packages=find_packages(),
+    platforms=['any'],
     install_requires=[],
     license="MIT License",
     keywords="ConfiParser,ini",
